@@ -61,37 +61,22 @@ public class PizzaRepository {
     }
 
 
-    public Set<Ingredients> findPizzaByIngredient(String ingredient) {
-        System.out.println("Szukanie po skladniku");
-        Set<Ingredients> pizzaFindedSet = pizzaSet.stream()
-                .map(x -> x.getIngredients())
-                .flatMap(Collection::stream)
-                .filter(p -> p.getIngedientType().name().contains(ingredient.toUpperCase()))
-                .collect(Collectors.toSet());
-
-        return pizzaFindedSet;
-
-    }
-
     public Set<Pizza> findPizzaByIngredient2(String ingredient) {
-        //System.out.println(ingredients.getIngedientType().name());
-        System.out.println("Szukanie po skladniku " + ingredient);
+        System.out.println("Find by ingredient " + ingredient);
         Set<Pizza> pizzaFindedSet2 = pizzaSet.stream()
-                .filter(x -> x.getIngredients().stream()
+                .filter(x -> x.getIngredients()
+                        .stream()
                         .anyMatch(y -> y.getIngedientType().name().contains(ingredient.toUpperCase())))
-
                 .collect(Collectors.toSet());
         return pizzaFindedSet2;
     }
 
     public Set<Pizza> findPizzaBySize(PizzaSize size) {
         System.out.println(size.name());
-        System.out.println("Szukanie po rozmiarze " + size);
+        System.out.println("Find by size " + size);
         Set<Pizza> pizzaFindedSet3 = pizzaSet.stream()
                 .filter(x -> x.getPizzaSize().name().contains(size.name()))
                 .collect(Collectors.toSet());
-
-        //pizzaFindedSet3.forEach(x -> System.out.println(x));
         return pizzaFindedSet3;
     }
 
